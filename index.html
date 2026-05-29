@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dra. Isabela Fontes — Nutrição Clínica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f7f4ef;
+    --warm-white: #faf9f7;
+    --dark: #1a1814;
+    --mid: #4a4540;
+    --muted: #9a9490;
+    --line: #e0dbd4;
+    --accent: #b5a898;
+    --gold: #c8a96e;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    background: var(--warm-white);
+    color: var(--dark);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 8px; height: 8px;
+    background: var(--dark);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 32px; height: 32px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s ease;
+  }
+  body:hover .cursor { opacity: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 60px;
+    background: transparent;
+    transition: background 0.5s, padding 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(250,249,247,0.92);
+    backdrop-filter: blur(12px);
+    padding: 18px 60px;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--dark);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--dark); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 60px 80px 60px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(3.2rem, 5vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--dark);
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp 1s 0.5s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--mid);
+  }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 1s 0.7s forwards;
+  }
+  .hero-desc {
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: var(--mid);
+    max-width: 380px;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s forwards;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 1s 1.1s forwards;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: 14px 40px;
+    background: var(--dark);
+    color: var(--warm-white);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.3s;
+    cursor: none;
+  }
+  .btn-primary:hover { background: var(--mid); transform: translateY(-2px); }
+  .btn-ghost {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+    transition: color 0.3s, border-color 0.3s;
+    cursor: none;
+  }
+  .btn-ghost:hover { color: var(--dark); border-color: var(--dark); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 1.4s 0.4s forwards;
+  }
+  .hero-img-wrap {
+    position: absolute;
+    inset: 0;
+    background: var(--cream);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #e8e2d9 0%, #d4cdc3 40%, #c9c0b4 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-photo-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(200,169,110,0.12), transparent 60%);
+  }
+  .hero-photo-placeholder svg {
+    width: 220px;
+    opacity: 0.2;
+  }
+  .hero-stats {
+    position: absolute;
+    bottom: 60px;
+    right: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 24px;
+    z-index: 3;
+    opacity: 0;
+    animation: fadeUp 1s 1.4s forwards;
+  }
+  .stat { text-align: right; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--dark);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* LINE DIVIDER */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* SECTION BASE */
+  section { padding: 120px 60px; }
+
+  /* ABOUT */
+  .about {
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .about-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    line-height: 1.15;
+    color: var(--dark);
+    position: sticky;
+    top: 100px;
+  }
+  .about-left h2 em {
+    font-style: italic;
+    color: var(--mid);
+  }
+  .about-right p {
+    font-size: 0.95rem;
+    line-height: 2;
+    color: var(--mid);
+    margin-bottom: 28px;
+  }
+  .about-quote {
+    border-left: 1px solid var(--gold);
+    padding-left: 28px;
+    margin: 40px 0;
+  }
+  .about-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--dark);
+    line-height: 1.6;
+  }
+
+  /* FORMATION */
+  .formation {
+    background: var(--warm-white);
+  }
+  .formation-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    margin-bottom: 80px;
+  }
+  .formation-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    color: var(--dark);
+  }
+  .formation-title em { font-style: italic; color: var(--mid); }
+  .formation-intro {
+    font-size: 0.9rem;
+    line-height: 2;
+    color: var(--mid);
+    align-self: end;
+  }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--line);
+  }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 60px;
+    padding: 40px 0 40px 40px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    transition: background 0.3s;
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 48px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 1px solid var(--accent);
+    transition: background 0.3s;
+  }
+  .timeline-item:hover::before { background: var(--gold); }
+  .timeline-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--muted);
+    padding-top: 4px;
+  }
+  .timeline-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .timeline-content .inst {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .timeline-content p {
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: var(--mid);
+  }
+
+  /* SKILLS */
+  .skills {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 120px 60px;
+  }
+  .skills-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    margin-bottom: 80px;
+  }
+  .skills-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    color: var(--cream);
+    line-height: 1.15;
+  }
+  .skills-title em { font-style: italic; color: var(--accent); }
+  .skills-intro {
+    font-size: 0.9rem;
+    line-height: 2;
+    color: var(--accent);
+    align-self: end;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #2a2620;
+  }
+  .skill-card {
+    background: var(--dark);
+    padding: 48px 40px;
+    transition: background 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 1px;
+    width: 0;
+    background: var(--gold);
+    transition: width 0.5s ease;
+  }
+  .skill-card:hover { background: #1e1c18; }
+  .skill-card:hover::before { width: 100%; }
+  .skill-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #2a2620;
+    line-height: 1;
+    margin-bottom: 24px;
+    transition: color 0.4s;
+  }
+  .skill-card:hover .skill-num { color: #3a3530; }
+  .skill-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+  .skill-desc {
+    font-size: 0.82rem;
+    line-height: 1.9;
+    color: var(--accent);
+  }
+
+  /* REVIEWS */
+  .reviews {
+    background: var(--cream);
+    padding: 120px 60px;
+  }
+  .reviews-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 70px;
+  }
+  .reviews-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    color: var(--dark);
+  }
+  .reviews-title em { font-style: italic; color: var(--mid); }
+  .reviews-avg {
+    text-align: right;
+  }
+  .reviews-score {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--dark);
+    line-height: 1;
+  }
+  .reviews-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 4px; margin: 4px 0; }
+  .reviews-count { font-size: 0.72rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
+
+  .reviews-slider {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-bottom: 80px;
+  }
+  .review-card {
+    background: var(--warm-white);
+    padding: 44px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: transform 0.3s;
+  }
+  .review-card:hover { transform: translateY(-4px); }
+  .review-stars { color: var(--gold); font-size: 0.8rem; letter-spacing: 4px; }
+  .review-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--mid);
+    line-height: 1.8;
+    flex: 1;
+  }
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .review-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--line), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--warm-white);
+  }
+  .review-name { font-size: 0.82rem; font-weight: 400; color: var(--dark); }
+  .review-date { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+  /* WRITE REVIEW */
+  .write-review {
+    background: var(--warm-white);
+    border: 1px solid var(--line);
+    padding: 60px;
+  }
+  .write-review h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 1.8rem;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .write-review > p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+  .star-select { display: flex; gap: 6px; margin-bottom: 32px; }
+  .star-btn {
+    background: none; border: none;
+    font-size: 1.4rem;
+    color: var(--line);
+    cursor: none;
+    transition: color 0.2s, transform 0.2s;
+  }
+  .star-btn:hover, .star-btn.active { color: var(--gold); transform: scale(1.15); }
+  .review-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .form-group input, .form-group textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    padding: 12px 0;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.3s;
+    resize: none;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--dark); }
+  .form-group textarea { height: 100px; }
+  .submit-row {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+  .review-success {
+    display: none;
+    text-align: center;
+    padding: 40px;
+  }
+  .review-success.visible { display: block; }
+  .review-success p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--mid);
+  }
+
+  /* CONTACT */
+  .contact {
+    background: var(--dark);
+    padding: 140px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: start;
+  }
+  .contact-left .section-label { color: var(--gold); margin-bottom: 20px; }
+  .contact-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 32px;
+  }
+  .contact-title em { font-style: italic; color: var(--accent); }
+  .contact-desc {
+    font-size: 0.88rem;
+    line-height: 2;
+    color: var(--accent);
+    margin-bottom: 48px;
+  }
+  .contact-infos { display: flex; flex-direction: column; gap: 20px; }
+  .contact-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid #2a2620;
+  }
+  .contact-icon {
+    width: 36px; height: 36px;
+    border: 1px solid #2a2620;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .contact-info-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px; }
+  .contact-info-val { font-size: 0.9rem; color: var(--cream); font-weight: 300; }
+
+  .contact-form { padding-top: 0; }
+  .contact-form h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 1.6rem;
+    color: var(--cream);
+    margin-bottom: 36px;
+  }
+  .contact-fields { display: flex; flex-direction: column; gap: 24px; }
+  .contact-fields .form-group label { color: #4a4540; }
+  .contact-fields input, .contact-fields textarea, .contact-fields select {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #2a2620;
+    padding: 12px 0;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: var(--cream);
+    outline: none;
+    transition: border-color 0.3s;
+    resize: none;
+    width: 100%;
+  }
+  .contact-fields input:focus, .contact-fields textarea:focus, .contact-fields select:focus {
+    border-color: var(--accent);
+  }
+  .contact-fields select option { background: var(--dark); color: var(--cream); }
+  .contact-fields textarea { height: 100px; }
+  .contact-submit {
+    margin-top: 32px;
+    display: inline-block;
+    padding: 15px 48px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: none;
+    transition: background 0.3s, color 0.3s;
+  }
+  .contact-submit:hover { background: var(--accent); color: var(--dark); }
+  .contact-success {
+    display: none;
+    padding: 40px 0;
+  }
+  .contact-success.visible { display: block; }
+  .contact-success p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 300;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #0f0e0c;
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #1a1814;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+  }
+  .footer-copy { font-size: 0.7rem; letter-spacing: 0.1em; color: #3a3530; }
+  .footer-links { display: flex; gap: 32px; }
+  .footer-links a {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #3a3530;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 20px 28px; }
+    nav.scrolled { padding: 14px 28px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { height: 55vw; }
+    .hero-left { padding: 120px 28px 60px; }
+    .hero-stats { bottom: 28px; right: 28px; }
+    section { padding: 80px 28px; }
+    .about, .formation-header, .skills-header { grid-template-columns: 1fr; gap: 32px; }
+    .about-left h2 { position: static; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .reviews-slider { grid-template-columns: 1fr; }
+    .reviews-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .review-form { grid-template-columns: 1fr; }
+    .review-form .form-group.full { grid-column: 1; }
+    .contact { grid-template-columns: 1fr; gap: 60px; padding: 80px 28px; }
+    .write-review { padding: 40px 28px; }
+    footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 28px; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .timeline-item { grid-template-columns: 1fr; gap: 8px; padding-left: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Isabela Fontes · CRN 12345</a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#formacao">Formação</a></li>
+    <li><a href="#especialidades">Especialidades</a></li>
+    <li><a href="#avaliacoes">Avaliações</a></li>
+    <li><a href="https://wa.me/+5512981860550">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Nutricionista Clínica · São Paulo</p>
+    <h1 class="hero-title">Dra.<br>Isabela<br><em>Fontes</em></h1>
+    <p class="hero-sub">Nutrindo corpo, equilibrando vida.</p>
+    <p class="hero-desc">Cuidado nutricional individualizado, baseado em ciência e sensibilidade humana. Uma abordagem que respeita sua história, seu ritmo e seus objetivos.</p>
+    <div class="hero-cta">
+      <a href="https://wa.me/+5512981860550" class="btn-primary">Agendar Consulta</a>
+      <a href="#sobre" class="btn-ghost">Conheça minha história</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-wrap">
+      <div class="hero-photo-placeholder">
+        <svg viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="90" rx="45" ry="50" fill="#1a1814" opacity="0.6"/>
+          <path d="M30 280 Q30 180 100 170 Q170 180 170 280" fill="#1a1814" opacity="0.6"/>
+        </svg>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Anos de experiência</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1.200+</div>
+        <div class="stat-label">Pacientes atendidos</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4.9</div>
+        <div class="stat-label">Nota média</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section class="about reveal" id="sobre">
+  <div class="about-left">
+    <p class="section-label">Sobre</p>
+    <h2>Ciência<br><em>com alma.</em></h2>
+  </div>
+  <div class="about-right">
+    <p>Sou Isabela Fontes, nutricionista clínica formada pela Universidade de São Paulo com pós-graduação em Nutrição Funcional e Comportamental. Ao longo de mais de oito anos de prática, aprendi que cada pessoa carrega uma relação única com a alimentação — e que mudanças sustentáveis só acontecem quando respeitamos essa singularidade.</p>
+    <div class="about-quote">
+      <p>"Não acredito em dietas genéricas. Acredito em escuta atenta, em ciência aplicada com cuidado, e em construir juntos um caminho que faça sentido para você."</p>
+    </div>
+    <p>Minha abordagem integra evidências científicas atualizadas com uma visão humanizada do cuidado. Trabalho com emagrecimento, saúde digestiva, nutrição hormonal, e qualidade de vida em todas as fases da vida. Atendo presencialmente em São Paulo (Jardins) e de forma online para todo o Brasil.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FORMATION -->
+<section class="formation reveal" id="formacao">
+  <div class="formation-header">
+    <div>
+      <p class="section-label">Formação</p>
+      <h2 class="formation-title">Uma base<br><em>sólida.</em></h2>
+    </div>
+    <p class="formation-intro">Formação contínua e especializada em algumas das melhores instituições do Brasil, com atualização constante nas fronteiras da ciência nutricional.</p>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">2015</div>
+      <div class="timeline-content">
+        <h3>Graduação em Nutrição</h3>
+        <p class="inst">Universidade de São Paulo — USP</p>
+        <p>Formação completa em ciências da nutrição com ênfase em nutrição clínica e dietética. Participação em projetos de pesquisa em metabolismo e microbiota intestinal.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2017</div>
+      <div class="timeline-content">
+        <h3>Pós-graduação em Nutrição Funcional</h3>
+        <p class="inst">VP Centro de Nutrição Funcional</p>
+        <p>Especialização em abordagem funcional integrativa, com foco em inflamação sistêmica, saúde intestinal e modulação metabólica por meio da alimentação.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2019</div>
+      <div class="timeline-content">
+        <h3>Especialização em Comportamento Alimentar</h3>
+        <p class="inst">IPGS — Instituto de Pesquisa e Gestão em Saúde</p>
+        <p>Formação em psicologia da alimentação, comer intuitivo e tratamento de compulsão e restrição alimentar, com abordagem multidisciplinar.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <div class="timeline-content">
+        <h3>Certificação em Nutrição Esportiva</h3>
+        <p class="inst">CREFITO — Conselho Regional</p>
+        <p>Certificação em nutrição aplicada à performance, composição corporal e recuperação atlética para praticantes de atividade física recreativa e profissional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills reveal" id="especialidades">
+  <div class="skills-header">
+    <div>
+      <p class="section-label" style="color: var(--gold);">Especialidades</p>
+      <h2 class="skills-title">O que<br><em>ofereço.</em></h2>
+    </div>
+    <p class="skills-intro">Áreas de atuação desenvolvidas com profundidade ao longo de anos de prática clínica e formação especializada.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-num">01</div>
+      <h3 class="skill-name">Emagrecimento Saudável</h3>
+      <p class="skill-desc">Protocolo individualizado focado em mudança de hábitos duradoura, sem restrições extremas ou soluções temporárias. Resultado com saúde e bem-estar.</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-num">02</div>
+      <h3 class="skill-name">Saúde Intestinal</h3>
+      <p class="skill-desc">Diagnóstico e tratamento de disbiose, síndrome do intestino irritável, refluxo e inflamação sistêmica por meio da modulação alimentar e da microbiota.</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-num">03</div>
+      <h3 class="skill-name">Nutrição Hormonal</h3>
+      <p class="skill-desc">Acompanhamento especializado para saúde feminina, menopausa, síndrome do ovário policístico e equilíbrio hormonal via nutrição integrativa.</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-num">04</div>
+      <h3 class="skill-name">Comportamento Alimentar</h3>
+      <p class="skill-desc">Abordagem humanizada para compulsão, restrição e relação emocional com a comida. Trabalho integrado com psicólogos e outros profissionais de saúde.</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-num">05</div>
+      <h3 class="skill-name">Performance & Esporte</h3>
+      <p class="skill-desc">Estratégias nutricionais para otimização da composição corporal, energia e recuperação para atletas amadores e praticantes de atividade física.</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-num">06</div>
+      <h3 class="skill-name">Nutrição Clínica Geral</h3>
+      <p class="skill-desc">Acompanhamento integral para prevenção e manejo de doenças crônicas como diabetes, hipertensão, dislipidemia e saúde cardiovascular.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews reveal" id="avaliacoes">
+  <div class="reviews-header">
+    <div>
+      <p class="section-label">Avaliações</p>
+      <h2 class="reviews-title">O que dizem<br><em>os pacientes.</em></h2>
+    </div>
+    <div class="reviews-avg">
+      <div class="reviews-score">4.9</div>
+      <div class="reviews-stars">★★★★★</div>
+      <div class="reviews-count">Baseado em 214 avaliações</div>
+    </div>
+  </div>
+
+  <div class="reviews-slider" id="reviewsContainer">
+    <!-- Reviews injected by JS -->
+  </div>
+
+  <!-- Write review -->
+  <div class="write-review">
+    <h3>Deixe sua avaliação</h3>
+    <p>Sua experiência ajuda outras pessoas a encontrar o cuidado que precisam.</p>
+
+    <div class="star-select" id="starSelect">
+      <button class="star-btn" data-val="1">★</button>
+      <button class="star-btn" data-val="2">★</button>
+      <button class="star-btn" data-val="3">★</button>
+      <button class="star-btn" data-val="4">★</button>
+      <button class="star-btn" data-val="5">★</button>
+    </div>
+
+    <div id="reviewFormWrap">
+      <div class="review-form">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" id="rName" placeholder="Seu nome">
+        </div>
+        <div class="form-group">
+          <label>Período de acompanhamento</label>
+          <input type="text" id="rPeriod" placeholder="ex: 6 meses">
+        </div>
+        <div class="form-group full">
+          <label>Comentário</label>
+          <textarea id="rComment" placeholder="Conte sua experiência..."></textarea>
+        </div>
+        <div class="submit-row">
+          <button class="btn-primary" onclick="submitReview()">Enviar avaliação</button>
+        </div>
+      </div>
+    </div>
+    <div class="review-success" id="reviewSuccess">
+      <p>Obrigada pelo seu depoimento. ✦</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact reveal" id="contato">
+  <div class="contact-left">
+    <p class="section-label">Contato</p>
+    <h2 class="contact-title">Vamos começar<br><em>juntos?</em></h2>
+    <p class="contact-desc">Agende sua consulta inicial. Uma conversa de 15 minutos — sem compromisso — para entendermos se podemos trilhar esse caminho juntos.</p>
+    <div class="contact-infos">
+      <div class="contact-info">
+        <div class="contact-icon">✦</div>
+        <div>
+          <p class="contact-info-label">Localização</p>
+          <p class="contact-info-val">Jardins, São Paulo — SP</p>
+        </div>
+      </div>
+      <div class="contact-info">
+        <div class="contact-icon">◎</div>
+        <div>
+          <p class="contact-info-label">Atendimento Online</p>
+          <p class="contact-info-val">Para todo o Brasil</p>
+        </div>
+      </div>
+      <div class="contact-info">
+        <div class="contact-icon">◇</div>
+        <div>
+          <p class="contact-info-label">WhatsApp</p>
+          <p class="contact-info-val">(11) 99999-0000</p>
+        </div>
+      </div>
+      <div class="contact-info">
+        <div class="contact-icon">@</div>
+        <div>
+          <p class="contact-info-label">E-mail</p>
+          <p class="contact-info-val">isabela@isabelafontes.com.br</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form">
+    <h3>Envie uma mensagem</h3>
+    <div id="contactFormWrap">
+      <div class="contact-fields">
+        <div class="form-group">
+          <label>Nome completo</label>
+          <input type="text" id="cName" placeholder="Seu nome">
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" id="cEmail" placeholder="seu@email.com">
+        </div>
+        <div class="form-group">
+          <label>WhatsApp</label>
+          <input type="tel" id="cPhone" placeholder="(11) 9 0000-0000">
+        </div>
+        <div class="form-group">
+          <label>Objetivo principal</label>
+          <select id="cGoal">
+            <option value="" disabled selected>Selecione</option>
+            <option>Emagrecimento</option>
+            <option>Saúde intestinal</option>
+            <option>Nutrição hormonal</option>
+            <option>Comportamento alimentar</option>
+            <option>Performance esportiva</option>
+            <option>Nutrição clínica geral</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Modalidade</label>
+          <select id="cMode">
+            <option value="" disabled selected>Selecione</option>
+            <option>Presencial — Jardins, SP</option>
+            <option>Online</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mensagem (opcional)</label>
+          <textarea id="cMsg" placeholder="Conte um pouco sobre você e seus objetivos..."></textarea>
+        </div>
+      </div>
+      <button class="contact-submit" onclick="submitContact()">Enviar mensagem</button>
+    </div>
+    <div class="contact-success" id="contactSuccess">
+      <p>Mensagem recebida. Retornarei em até 24 horas. ✦</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Isabela Fontes · Nutrição</div>
+  <div class="footer-copy">© 2025 · CRN 12345/SP</div>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Política de Privacidade</a>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+function animRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animRing); }
+animRing();
+document.querySelectorAll('a, button, .skill-card, .review-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.width = '14px'; cursor.style.height = '14px'; cursor.style.background = 'var(--gold)'; });
+  el.addEventListener('mouseleave', () => { cursor.style.width = '8px'; cursor.style.height = '8px'; cursor.style.background = 'var(--dark)'; });
+});
+
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
+
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Reviews data
+const reviews = [
+  { name: 'Ana Paula R.', stars: 5, text: 'A Isabela transformou completamente minha relação com a comida. Nunca me senti assim — sem culpa, com energia e resultados reais. Um acompanhamento humano e científico ao mesmo tempo.', period: '1 ano', date: 'Março 2025' },
+  { name: 'Carlos M.', stars: 5, text: 'Cheguei com muita resistência a dietas, já havia tentado de tudo. O diferencial dela é que não é sobre dieta, é sobre mudança de vida. Em 8 meses perdi 18kg e mantive.', period: '8 meses', date: 'Janeiro 2025' },
+  { name: 'Fernanda S.', stars: 5, text: 'Tratei minha SII depois de anos sofrendo. A abordagem integrativa dela foi o que faltava. Recomendo de olhos fechados para quem tem problemas digestivos crônicos.', period: '6 meses', date: 'Fevereiro 2025' },
+  { name: 'Mariana T.', stars: 5, text: 'Atendimento online impecável. Mesmo à distância me sinto completamente acompanhada. Os planos são práticos, deliciosos e encaixam na minha rotina de mãe de dois filhos.', period: '10 meses', date: 'Abril 2025' },
+  { name: 'Roberto L.', stars: 4, text: 'Procurei a Isabela para melhorar minha performance nos treinos. Os resultados foram além do esperado — mais energia, menos lesões e composição corporal muito melhor.', period: '5 meses', date: 'Fevereiro 2025' },
+  { name: 'Juliana K.', stars: 5, text: 'Depois de anos com problemas hormonais e sem conseguir emagrecer, finalmente entendi o que meu corpo precisava. A Isabela foi a profissional que me fez acreditar que era possível.', period: '1 ano', date: 'Maio 2025' }
+];
+
+function renderReviews(list) {
+  const c = document.getElementById('reviewsContainer');
+  c.innerHTML = list.map(r => `
+    <div class="review-card">
+      <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</div>
+      <p class="review-text">"${r.text}"</p>
+      <div class="review-author">
+        <div class="review-avatar">${r.name[0]}</div>
+        <div>
+          <p class="review-name">${r.name}</p>
+          <p class="review-date">${r.period} de acompanhamento · ${r.date}</p>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+renderReviews(reviews);
+
+// Star select
+let selectedStars = 5;
+const starBtns = document.querySelectorAll('.star-btn');
+starBtns.forEach(btn => {
+  btn.addEventListener('mouseenter', () => {
+    const v = parseInt(btn.dataset.val);
+    starBtns.forEach(b => b.classList.toggle('active', parseInt(b.dataset.val) <= v));
+  });
+  btn.addEventListener('click', () => {
+    selectedStars = parseInt(btn.dataset.val);
+    starBtns.forEach(b => b.classList.toggle('active', parseInt(b.dataset.val) <= selectedStars));
+  });
+});
+document.getElementById('starSelect').addEventListener('mouseleave', () => {
+  starBtns.forEach(b => b.classList.toggle('active', parseInt(b.dataset.val) <= selectedStars));
+});
+starBtns.forEach(b => { if (parseInt(b.dataset.val) <= 5) b.classList.add('active'); });
+
+// Submit review
+function submitReview() {
+  const name = document.getElementById('rName').value.trim() || 'Anônimo';
+  const period = document.getElementById('rPeriod').value.trim() || '—';
+  const comment = document.getElementById('rComment').value.trim();
+  if (!comment) { document.getElementById('rComment').focus(); return; }
+  const newReview = { name, stars: selectedStars, text: comment, period, date: 'Maio 2025' };
+  reviews.unshift(newReview);
+  renderReviews(reviews);
+  document.getElementById('reviewFormWrap').style.display = 'none';
+  document.getElementById('reviewSuccess').classList.add('visible');
+}
+
+// Submit contact
+function submitContact() {
+  document.getElementById('contactFormWrap').style.display = 'none';
+  document.getElementById('contactSuccess').classList.add('visible');
+}
+</script>
+</body>
+</html>
