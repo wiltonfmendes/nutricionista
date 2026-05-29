@@ -500,7 +500,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2px;
-    margin-bottom: 80px;
   }
   .review-card {
     background: var(--warm-white);
@@ -541,179 +540,6 @@
   }
   .review-name { font-size: 0.82rem; font-weight: 400; color: var(--dark); }
   .review-date { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
-
-  /* WRITE REVIEW */
-  .write-review {
-    background: var(--warm-white);
-    border: 1px solid var(--line);
-    padding: 60px;
-  }
-  .write-review h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: 1.8rem;
-    color: var(--dark);
-    margin-bottom: 8px;
-  }
-  .write-review > p {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-bottom: 40px;
-  }
-  .star-select { display: flex; gap: 6px; margin-bottom: 32px; }
-  .star-btn {
-    background: none; border: none;
-    font-size: 1.4rem;
-    color: var(--line);
-    cursor: none;
-    transition: color 0.2s, transform 0.2s;
-  }
-  .star-btn:hover, .star-btn.active { color: var(--gold); transform: scale(1.15); }
-  .review-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .form-group { display: flex; flex-direction: column; gap: 8px; }
-  .form-group.full { grid-column: 1 / -1; }
-  .form-group label {
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .form-group input, .form-group textarea {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid var(--line);
-    padding: 12px 0;
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    font-size: 0.9rem;
-    color: var(--dark);
-    outline: none;
-    transition: border-color 0.3s;
-    resize: none;
-  }
-  .form-group input:focus, .form-group textarea:focus { border-color: var(--dark); }
-  .form-group textarea { height: 100px; }
-  .submit-row {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
-  }
-  .review-success {
-    display: none;
-    text-align: center;
-    padding: 40px;
-  }
-  .review-success.visible { display: block; }
-  .review-success p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--mid);
-  }
-
-  /* CONTACT */
-  .contact {
-    background: var(--dark);
-    padding: 140px 60px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 100px;
-    align-items: start;
-  }
-  .contact-left .section-label { color: var(--gold); margin-bottom: 20px; }
-  .contact-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: clamp(2.5rem, 4vw, 4.5rem);
-    color: var(--cream);
-    line-height: 1.1;
-    margin-bottom: 32px;
-  }
-  .contact-title em { font-style: italic; color: var(--accent); }
-  .contact-desc {
-    font-size: 0.88rem;
-    line-height: 2;
-    color: var(--accent);
-    margin-bottom: 48px;
-  }
-  .contact-infos { display: flex; flex-direction: column; gap: 20px; }
-  .contact-info {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 18px 0;
-    border-bottom: 1px solid #2a2620;
-  }
-  .contact-icon {
-    width: 36px; height: 36px;
-    border: 1px solid #2a2620;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.75rem;
-    color: var(--gold);
-    flex-shrink: 0;
-  }
-  .contact-info-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px; }
-  .contact-info-val { font-size: 0.9rem; color: var(--cream); font-weight: 300; }
-
-  .contact-form { padding-top: 0; }
-  .contact-form h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: 1.6rem;
-    color: var(--cream);
-    margin-bottom: 36px;
-  }
-  .contact-fields { display: flex; flex-direction: column; gap: 24px; }
-  .contact-fields .form-group label { color: #4a4540; }
-  .contact-fields input, .contact-fields textarea, .contact-fields select {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #2a2620;
-    padding: 12px 0;
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    font-size: 0.9rem;
-    color: var(--cream);
-    outline: none;
-    transition: border-color 0.3s;
-    resize: none;
-    width: 100%;
-  }
-  .contact-fields input:focus, .contact-fields textarea:focus, .contact-fields select:focus {
-    border-color: var(--accent);
-  }
-  .contact-fields select option { background: var(--dark); color: var(--cream); }
-  .contact-fields textarea { height: 100px; }
-  .contact-submit {
-    margin-top: 32px;
-    display: inline-block;
-    padding: 15px 48px;
-    background: transparent;
-    border: 1px solid var(--accent);
-    color: var(--cream);
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    cursor: none;
-    transition: background 0.3s, color 0.3s;
-  }
-  .contact-submit:hover { background: var(--accent); color: var(--dark); }
-  .contact-success {
-    display: none;
-    padding: 40px 0;
-  }
-  .contact-success.visible { display: block; }
-  .contact-success p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-style: italic;
-    color: var(--accent);
-    font-weight: 300;
-  }
 
   /* FOOTER */
   footer {
@@ -778,11 +604,6 @@
     .skills-grid { grid-template-columns: 1fr; }
     .reviews-slider { grid-template-columns: 1fr; }
     .reviews-header { flex-direction: column; align-items: flex-start; gap: 20px; }
-    .review-form { grid-template-columns: 1fr; }
-    .review-form .form-group.full { grid-column: 1; }
-    .contact { grid-template-columns: 1fr; gap: 60px; padding: 80px 28px; }
-    .write-review { padding: 40px 28px; }
-    footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 28px; }
     .footer-links { flex-wrap: wrap; justify-content: center; }
     .timeline-item { grid-template-columns: 1fr; gap: 8px; padding-left: 32px; }
   }
@@ -793,7 +614,6 @@
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo">Julia Brito · CRN 12345</a>
   <ul class="nav-links">
@@ -801,19 +621,18 @@
     <li><a href="#formacao">Formação</a></li>
     <li><a href="#especialidades">Especialidades</a></li>
     <li><a href="#avaliacoes">Avaliações</a></li>
-    <li><a href="https://wa.me/+5512981860550">Contato</a></li>
+    <li><a href="https://wa.me/+5512981860550" target="_blank">Contato</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="inicio">
   <div class="hero-left">
-    <p class="hero-eyebrow">Nutricionista Clínica · São Paulo</p>
-    <h1 class="hero-title">Nutricionista<br>Julia<br><em>Brito</em></h1>
+    <p class="hero-eyebrow">Nutricionista · São José dos Campos</p>
+    <h1 class="hero-title">Nutri<br>Julia Brito<br></h1>
     <p class="hero-sub">Nutrindo corpo, equilibrando vida.</p>
     <p class="hero-desc">Cuidado nutricional individualizado, baseado em ciência e sensibilidade humana. Uma abordagem que respeita sua história, seu ritmo e seus objetivos.</p>
     <div class="hero-cta">
-      <a href="https://wa.me/+5512981860550" class="btn-primary">Agendar Consulta</a>
+      <a href="https://wa.me/+5512981860550" target="_blank" class="btn-primary">Agendar Consulta</a>
       <a href="#sobre" class="btn-ghost">Conheça minha história</a>
     </div>
   </div>
@@ -845,7 +664,6 @@
 
 <div class="divider"></div>
 
-<!-- ABOUT -->
 <section class="about reveal" id="sobre">
   <div class="about-left">
     <p class="section-label">Sobre</p>
@@ -854,7 +672,7 @@
   <div class="about-right">
     <p>Sou Isabela Fontes, nutricionista clínica formada pela Universidade de São Paulo com pós-graduação em Nutrição Funcional e Comportamental. Ao longo de mais de oito anos de prática, aprendi que cada pessoa carrega uma relação única com a alimentação — e que mudanças sustentáveis só acontecem quando respeitamos essa singularidade.</p>
     <div class="about-quote">
-      <p>"Não acredito em dietas genéricas. Acredito em escuta atenta, em ciência aplicada com cuidado, e em construir juntos um caminho que faça sentido para você."</p>
+      <p>"Não acredito em dietas genéricas. Acredito em escuta atenta, in ciência aplicada com cuidado, e em construir juntos um caminho que faça sentido para você."</p>
     </div>
     <p>Minha abordagem integra evidências científicas atualizadas com uma visão humanizada do cuidado. Trabalho com emagrecimento, saúde digestiva, nutrição hormonal, e qualidade de vida em todas as fases da vida. Atendo presencialmente em São Paulo (Jardins) e de forma online para todo o Brasil.</p>
   </div>
@@ -862,7 +680,6 @@
 
 <div class="divider"></div>
 
-<!-- FORMATION -->
 <section class="formation reveal" id="formacao">
   <div class="formation-header">
     <div>
@@ -907,7 +724,6 @@
   </div>
 </section>
 
-<!-- SKILLS -->
 <section class="skills reveal" id="especialidades">
   <div class="skills-header">
     <div>
@@ -950,7 +766,6 @@
   </div>
 </section>
 
-<!-- REVIEWS -->
 <section class="reviews reveal" id="avaliacoes">
   <div class="reviews-header">
     <div>
@@ -965,133 +780,7 @@
   </div>
 
   <div class="reviews-slider" id="reviewsContainer">
-    <!-- Reviews injected by JS -->
-  </div>
-
-  <!-- Write review -->
-  <div class="write-review">
-    <h3>Deixe sua avaliação</h3>
-    <p>Sua experiência ajuda outras pessoas a encontrar o cuidado que precisam.</p>
-
-    <div class="star-select" id="starSelect">
-      <button class="star-btn" data-val="1">★</button>
-      <button class="star-btn" data-val="2">★</button>
-      <button class="star-btn" data-val="3">★</button>
-      <button class="star-btn" data-val="4">★</button>
-      <button class="star-btn" data-val="5">★</button>
     </div>
-
-    <div id="reviewFormWrap">
-      <div class="review-form">
-        <div class="form-group">
-          <label>Nome</label>
-          <input type="text" id="rName" placeholder="Seu nome">
-        </div>
-        <div class="form-group">
-          <label>Período de acompanhamento</label>
-          <input type="text" id="rPeriod" placeholder="ex: 6 meses">
-        </div>
-        <div class="form-group full">
-          <label>Comentário</label>
-          <textarea id="rComment" placeholder="Conte sua experiência..."></textarea>
-        </div>
-        <div class="submit-row">
-          <button class="btn-primary" onclick="submitReview()">Enviar avaliação</button>
-        </div>
-      </div>
-    </div>
-    <div class="review-success" id="reviewSuccess">
-      <p>Obrigada pelo seu depoimento. ✦</p>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact reveal" id="contato">
-  <div class="contact-left">
-    <p class="section-label">Contato</p>
-    <h2 class="contact-title">Vamos começar<br><em>juntos?</em></h2>
-    <p class="contact-desc">Agende sua consulta inicial. Uma conversa de 15 minutos — sem compromisso — para entendermos se podemos trilhar esse caminho juntos.</p>
-    <div class="contact-infos">
-      <div class="contact-info">
-        <div class="contact-icon">✦</div>
-        <div>
-          <p class="contact-info-label">Localização</p>
-          <p class="contact-info-val">Jardins, São Paulo — SP</p>
-        </div>
-      </div>
-      <div class="contact-info">
-        <div class="contact-icon">◎</div>
-        <div>
-          <p class="contact-info-label">Atendimento Online</p>
-          <p class="contact-info-val">Para todo o Brasil</p>
-        </div>
-      </div>
-      <div class="contact-info">
-        <div class="contact-icon">◇</div>
-        <div>
-          <p class="contact-info-label">WhatsApp</p>
-          <p class="contact-info-val">(11) 99999-0000</p>
-        </div>
-      </div>
-      <div class="contact-info">
-        <div class="contact-icon">@</div>
-        <div>
-          <p class="contact-info-label">E-mail</p>
-          <p class="contact-info-val">isabela@isabelafontes.com.br</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="contact-form">
-    <h3>Envie uma mensagem</h3>
-    <div id="contactFormWrap">
-      <div class="contact-fields">
-        <div class="form-group">
-          <label>Nome completo</label>
-          <input type="text" id="cName" placeholder="Seu nome">
-        </div>
-        <div class="form-group">
-          <label>E-mail</label>
-          <input type="email" id="cEmail" placeholder="seu@email.com">
-        </div>
-        <div class="form-group">
-          <label>WhatsApp</label>
-          <input type="tel" id="cPhone" placeholder="(11) 9 0000-0000">
-        </div>
-        <div class="form-group">
-          <label>Objetivo principal</label>
-          <select id="cGoal">
-            <option value="" disabled selected>Selecione</option>
-            <option>Emagrecimento</option>
-            <option>Saúde intestinal</option>
-            <option>Nutrição hormonal</option>
-            <option>Comportamento alimentar</option>
-            <option>Performance esportiva</option>
-            <option>Nutrição clínica geral</option>
-            <option>Outro</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Modalidade</label>
-          <select id="cMode">
-            <option value="" disabled selected>Selecione</option>
-            <option>Presencial — Jardins, SP</option>
-            <option>Online</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Mensagem (opcional)</label>
-          <textarea id="cMsg" placeholder="Conte um pouco sobre você e seus objetivos..."></textarea>
-        </div>
-      </div>
-      <button class="contact-submit" onclick="submitContact()">Enviar mensagem</button>
-    </div>
-    <div class="contact-success" id="contactSuccess">
-      <p>Mensagem recebida. Retornarei em até 24 horas. ✦</p>
-    </div>
-  </div>
 </section>
 
 <footer>
@@ -1127,7 +816,7 @@ const obs = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Reviews data
+// Reviews data (Seus depoimentos definidos)
 const reviews = [
   { name: 'Ana Paula R.', stars: 5, text: 'A Isabela transformou completamente minha relação com a comida. Nunca me senti assim — sem culpa, com energia e resultados reais. Um acompanhamento humano e científico ao mesmo tempo.', period: '1 ano', date: 'Março 2025' },
   { name: 'Carlos M.', stars: 5, text: 'Cheguei com muita resistência a dietas, já havia tentado de tudo. O diferencial dela é que não é sobre dieta, é sobre mudança de vida. Em 8 meses perdi 18kg e mantive.', period: '8 meses', date: 'Janeiro 2025' },
@@ -1154,43 +843,6 @@ function renderReviews(list) {
   `).join('');
 }
 renderReviews(reviews);
-
-// Star select
-let selectedStars = 5;
-const starBtns = document.querySelectorAll('.star-btn');
-starBtns.forEach(btn => {
-  btn.addEventListener('mouseenter', () => {
-    const v = parseInt(btn.dataset.val);
-    starBtns.forEach(b => b.classList.toggle('active', parseInt(b.dataset.val) <= v));
-  });
-  btn.addEventListener('click', () => {
-    selectedStars = parseInt(btn.dataset.val);
-    starBtns.forEach(b => b.classList.toggle('active', parseInt(b.dataset.val) <= selectedStars));
-  });
-});
-document.getElementById('starSelect').addEventListener('mouseleave', () => {
-  starBtns.forEach(b => b.classList.toggle('active', parseInt(b.dataset.val) <= selectedStars));
-});
-starBtns.forEach(b => { if (parseInt(b.dataset.val) <= 5) b.classList.add('active'); });
-
-// Submit review
-function submitReview() {
-  const name = document.getElementById('rName').value.trim() || 'Anônimo';
-  const period = document.getElementById('rPeriod').value.trim() || '—';
-  const comment = document.getElementById('rComment').value.trim();
-  if (!comment) { document.getElementById('rComment').focus(); return; }
-  const newReview = { name, stars: selectedStars, text: comment, period, date: 'Maio 2025' };
-  reviews.unshift(newReview);
-  renderReviews(reviews);
-  document.getElementById('reviewFormWrap').style.display = 'none';
-  document.getElementById('reviewSuccess').classList.add('visible');
-}
-
-// Submit contact
-function submitContact() {
-  document.getElementById('contactFormWrap').style.display = 'none';
-  document.getElementById('contactSuccess').classList.add('visible');
-}
 </script>
 </body>
 </html>
